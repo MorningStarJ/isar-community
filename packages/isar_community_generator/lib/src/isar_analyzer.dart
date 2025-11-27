@@ -1,4 +1,5 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:isar_community_generator/src/element_compat.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:dartx/dartx.dart';
@@ -124,8 +125,8 @@ class IsarAnalyzer {
     }
 
     final hasCollectionSupertype = modelClass.allSupertypes.any((type) {
-      return type.element3.collectionAnnotation != null ||
-          type.element3.embeddedAnnotation != null;
+      return type.element3?.collectionAnnotation != null ||
+          type.element3?.embeddedAnnotation != null;
     });
     if (hasCollectionSupertype) {
       err(

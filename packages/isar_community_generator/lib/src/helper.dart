@@ -1,17 +1,25 @@
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element2.dart' hide Name;
+import 'package:analyzer/dart/element/element.dart' hide Name;
+import 'package:isar_community_generator/src/element_compat.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:dartx/dartx.dart';
 import 'package:isar_community/isar.dart';
 import 'package:source_gen/source_gen.dart';
 
-const TypeChecker _collectionChecker = TypeChecker.fromRuntime(Collection);
-const TypeChecker _enumeratedChecker = TypeChecker.fromRuntime(Enumerated);
-const TypeChecker _embeddedChecker = TypeChecker.fromRuntime(Embedded);
-const TypeChecker _ignoreChecker = TypeChecker.fromRuntime(Ignore);
-const TypeChecker _nameChecker = TypeChecker.fromRuntime(Name);
-const TypeChecker _indexChecker = TypeChecker.fromRuntime(Index);
-const TypeChecker _backlinkChecker = TypeChecker.fromRuntime(Backlink);
+const TypeChecker _collectionChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Collection');
+const TypeChecker _enumeratedChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Enumerated');
+const TypeChecker _embeddedChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Embedded');
+const TypeChecker _ignoreChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Ignore');
+const TypeChecker _nameChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Name');
+const TypeChecker _indexChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Index');
+const TypeChecker _backlinkChecker =
+    TypeChecker.fromUrl('package:isar_community/isar.dart#Backlink');
 
 extension ClassElementX on ClassElement2 {
   bool get hasZeroArgsConstructor {
@@ -42,6 +50,8 @@ extension ClassElementX on ClassElement2 {
               e.isPublic &&
               !e.isStatic &&
               !_ignoreChecker.hasAnnotationOf(e.nonSynthetic2) &&
+              (e.getter2 == null ||
+                  !_ignoreChecker.hasAnnotationOf(e.getter2!)) &&
               !ignoreFields.contains(e.name3),
         )
         .distinctBy((e) => e.name3)

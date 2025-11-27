@@ -1,10 +1,11 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:isar_community_generator/src/element_compat.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:isar_community/isar.dart';
 import 'package:isar_community_generator/src/helper.dart';
 import 'package:source_gen/source_gen.dart';
 
-const TypeChecker _dateTimeChecker = TypeChecker.fromRuntime(DateTime);
+const TypeChecker _dateTimeChecker = TypeChecker.fromUrl('dart:core#DateTime');
 bool _isDateTime(Element2 element) => _dateTimeChecker.isExactly(element);
 
 extension DartTypeX on DartType {

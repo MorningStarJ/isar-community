@@ -23,16 +23,24 @@ extension ClassElementCompat on ClassElement {
   List<ConstructorElement> get constructors2 => constructors;
   List<FieldElement> get fields2 => fields;
   List<MethodElement> get methods2 => methods;
-  
+
   List<PropertyAccessorElement> get getters2 {
-    // Fallback: implicit getters from fields. 
+    // Fallback: implicit getters from fields.
     // Explicit accessors might be missing if 'accessors' is not available.
-    return fields.map((f) => f.getter).where((e) => e != null).cast<PropertyAccessorElement>().toList();
+    return fields
+        .map((f) => f.getter)
+        .where((e) => e != null)
+        .cast<PropertyAccessorElement>()
+        .toList();
   }
-  
+
   List<PropertyAccessorElement> get setters2 {
     // Fallback: implicit setters from fields.
-    return fields.map((f) => f.setter).where((e) => e != null).cast<PropertyAccessorElement>().toList();
+    return fields
+        .map((f) => f.setter)
+        .where((e) => e != null)
+        .cast<PropertyAccessorElement>()
+        .toList();
   }
 }
 
@@ -55,7 +63,8 @@ extension InstantiatedTypeAliasElementCompat on InstantiatedTypeAliasElement {
 
 extension ConstructorElementCompat on ConstructorElement {
   Element get enclosingElement2 => enclosingElement;
-  CompatFragment get firstFragment => CompatFragment((name ?? '').isEmpty ? null : 0);
+  CompatFragment get firstFragment =>
+      CompatFragment((name ?? '').isEmpty ? null : 0);
 }
 
 extension PropertyInducingElementCompat on PropertyInducingElement {
